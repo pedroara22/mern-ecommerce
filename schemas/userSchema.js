@@ -1,20 +1,22 @@
 module.exports = {
   //create user
   createUser(req) {
-    console.log(req)
     const mongoose = require("mongoose");
     const userSchema = new mongoose.Schema({
-      name: String,
+      username: String,
       email: String,
       password: String,
       role: String,
     });
     const User = mongoose.model("User", userSchema);
-    const user = new User({
-      name: "Pedro",
-      email: "pedrin",
-      password: "01329813",
-    });
-    user.save().then(() => console.log("User created"));
-  },
+    var userCreated = {
+      username: req.username,
+      email: req.email,
+      password: req.password,
+      role: req.role,
+    };
+    User.create(userCreated);
+    return userCreated;
+    
+  }
 };
