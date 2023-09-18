@@ -46,7 +46,7 @@ module.exports = (
   externalRoutes.get("/checkPassword", function (req, res) {
     var User = require("../model/userModel");
 
-    User.find({ username: req.body.username }).then(async (user) => {
+    User.findOne({ username: req.body.username }).then(async (user) => {
 
       if (user) {
 
@@ -69,6 +69,34 @@ module.exports = (
 
     });
   });
+
+  externalRoutes.put("/buyCourse", async function (req, res) {
+
+    //** Buy course */
+    var User = require("../model/userModel");
+    var Course = require("../model/courseModel");
+
+    User.findOne({ username: req.body.username }).then(async (user) => {
+      if(user){
+
+        Course.findOne({ name: req.body.name }).then(async (course) => {
+          if(course){
+            user.courses.push(course.name);
+            user.save();
+            res.send("Course added with success");
+          }
+          else{
+            res.status(401).send("Course not found");
+          }
+        });
+    }
+    else{
+      res.status(401).send("User not found");
+    }
+  });
+
+
+  })
 
   return externalRoutes;
 })();
