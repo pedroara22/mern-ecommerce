@@ -131,5 +131,4 @@ module.exports = (
         });
 
         return externalRoutes;
-    }
-)();
+    })();

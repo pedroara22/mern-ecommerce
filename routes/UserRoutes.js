@@ -94,7 +94,23 @@ module.exports = (
       res.status(401).send("User not found");
     }
   });
-
+  externalRoutes.get("/editCourse", async function (req, res) {
+    Course.findOne({ name: req.body.name }).then(async (course) => {
+      if(course){
+        req.body.name?req.body.name = course.name:null;
+        req.body.description?req.body.description = course.description:null;
+        req.body.price?req.body.price = course.price:null;
+        req.body.category[0]?req.body.category = course.category:null;
+        req.body.images[0]?req.body.image = course.image:null;
+        req.body.mainImage?req.body.mainImages = course.mainImage:null;
+        req.body.books[0]?req.body.books = course.books:null;
+        course.save();
+      }
+      else{
+        res.status(401).send("Course not found");
+      }
+    });
+  });
 
   })
 

@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mainRoutes = require("./routes/UserRoutes");
 const momentCheck = require("./routes/momentCheck");
 const courseRoutes = require("./routes/CourseRoutes");
+const BooksRoutes = require("./routes/BooksRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ initBe.init();
 app.use('/mc', momentCheck)
 app.use('/r', mainRoutes)
 app.use('/c', courseRoutes)
+app.use('/b', BooksRoutes)
 
 
 
