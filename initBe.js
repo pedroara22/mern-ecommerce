@@ -1,8 +1,9 @@
 module.exports = {
     init() {
         const mongoose = require('mongoose');
+        require('dotenv').config();
         try{
-            mongoose.connect('mongodb+srv://gameDevReact:pedroara22@cluster0.bissghl.mongodb.net/?retryWrites=true&w=majority',{
+            mongoose.connect(process.env.MONGO_KEY,{
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             })

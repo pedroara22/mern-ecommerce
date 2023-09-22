@@ -18,8 +18,8 @@ app.use('/r', mainRoutes)
 app.use('/c', courseRoutes)
 app.use('/b', BooksRoutes)
 
+let port = process.env.PORT ? process.env.PORT : 3333;
 
-
-app.listen(3333, () => {
+app.listen(port, () => {
   console.log("Server is running on port 3333");
 });
